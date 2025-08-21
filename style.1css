@@ -1,0 +1,27 @@
+body {
+  font-family: Arial, sans-serif;
+  padding: 20px;
+}
+
+.counter-container {
+  border: 2px solid black;
+  padding: 20px;
+  margin-bottom: 20px;
+  width: 400px;
+}
+
+h2 {
+  margin-top: 0;
+}
+
+textarea {
+  width: 100%;
+  height: 100px;
+  padding: 10px;
+  font-size: 16px;
+}
+
+.char-count {
+  margin-top: 10px;
+  font-weight: bold;
+}
