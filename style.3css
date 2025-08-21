@@ -1,0 +1,15 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 20px;
+  user-select: none; /* Prevent text selection while drawing */
+}
+
+h1 {
+  margin-bottom: 10px;
+}
+
+#drawingCanvas {
+  cursor: crosshair;
+  touch-action: none; /* Prevent touch scrolling while drawing on touch devices */
+}
+
