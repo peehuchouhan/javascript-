@@ -1,0 +1,8 @@
+const textarea = document.getElementById('textInput');
+const charCount = document.getElementById('charCount');
+
+textarea.addEventListener('input', () => {
+  const text = textarea.value;
+  const noSpaces = text.replace(/\s/g, ''); // Remove all spaces, tabs, and newlines
+  charCount.textContent = noSpaces.length;
+});
