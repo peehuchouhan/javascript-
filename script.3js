@@ -1,0 +1,60 @@
+const svg = document.getElementById('drawingCanvas');
+
+let isDrawing = false;
+let currentPath;
+let points = [];
+
+function getMousePosition(evt) {
+  const CTM = svg.getScreenCTM();
+  return {
+    x: (evt.clientX - CTM.e) / CTM.a,
+    y: (evt.clientY - CTM.f) / CTM.d
+  };
+}
+
+svg.addEventListener('mousedown', (e) => {
+  isDrawing = true;
+  points = [];
+
+  const pos = getMousePosition(e);
+
+  // Create new path element
+  currentPath = document.createElementNS("http://www.w3.org/2000/svg", "path");
+  currentPath.setAttribute('stroke', '#2196f3'); // Blue stroke
+  currentPath.setAttribute('stroke-width', 2);
+  currentPath.setAttribute('fill', 'none');
+  currentPath.setAttribute('stroke-linecap', 'round');
+  currentPath.setAttribute('stroke-linejoin', 'round');
+
+  points.push([pos.x, pos.y]);
+  currentPath.setAttribute('d', `M${pos.x} ${pos.y}`);
+
+  svg.appendChild(currentPath);
+});
+
+svg.addEventListener('mousemove', (e) => {
+  if (!isDrawing) return;
+  const pos = getMousePosition(e);
+  points.push([pos.x, pos.y]);
+
+  // Build path string
+  let d = `M${points[0][0]} ${points[0][1]}`;
+  for (let i = 1; i < points.length; i++) {
+    d += ` L${points[i][0]} ${points[i][1]}`;
+  }
+  currentPath.setAttribute('d', d);
+});
+
+svg.addEventListener('mouseup', () => {
+  isDrawing = false;
+  points = [];
+  currentPath = null;
+});
+
+svg.addEventListener('mouseleave', () => {
+  if (isDrawing) {
+    isDrawing = false;
+    points = [];
+    currentPath = null;
+  }
+});
