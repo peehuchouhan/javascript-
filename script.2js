@@ -1,0 +1,36 @@
+
+const products = [
+    { name: "T-Shirt", category: "Clothing" },
+    { name: "Jeans", category: "Clothing" },
+    { name: "Headphones", category: "Electronics" },
+    { name: "Smartphone", category: "Electronics" },
+    { name: "Novel", category: "Books" },
+    { name: "Cookbook", category: "Books" }
+  ];
+  
+  const categoryFilter = document.getElementById('categoryFilter');
+  const productList = document.getElementById('productList');
+  
+  function displayProducts(category) {
+    productList.innerHTML = ''; // Clear existing products
+  
+    // Filter products based on selected category
+    const filteredProducts = category === 'All' ? products : products.filter(product => product.category === category);
+  
+    // Display filtered products
+    filteredProducts.forEach(product => {
+      const productDiv = document.createElement('div');
+      productDiv.className = 'product-item';
+      productDiv.textContent = product.name;
+      productList.appendChild(productDiv);
+    });
+  }
+  
+  // Initial display - show all products
+  displayProducts('All');
+  
+  // Update product list on dropdown change
+  categoryFilter.addEventListener('change', (e) => {
+    displayProducts(e.target.value);
+  });
+  
